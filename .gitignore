@@ -1,0 +1,3 @@
+node_modules
+z_node_modules
+app/config/db.config_heroku.js
