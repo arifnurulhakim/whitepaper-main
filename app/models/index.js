@@ -12,6 +12,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
             ca: fs.readFileSync(path.join(__dirname, 'path', 'root-certs.crt')),
         },
     },
+    operatorsAliases: false,
     pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,
