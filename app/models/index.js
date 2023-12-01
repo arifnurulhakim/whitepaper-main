@@ -3,6 +3,12 @@ const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
     dialect: dbConfig.dialect,
+    dialectOptions: {
+        idle_in_transaction_session_timeout: dbConfig.dialectOptions.idle_in_transaction_session_timeout,
+        ssl: {
+            ca: fs.readFileSync(path.join(__dirname, 'path', 'root-certs.crt')),
+          },
+    },
     operatorsAliases: false,
     pool: {
         max: dbConfig.pool.max,
