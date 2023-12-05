@@ -10,7 +10,7 @@ module.exports = {
   DB: "whitepapper-main-db-0acc8b69bc342c60d",
   dialect: "postgres",
   dialectOptions: {
-    idle_in_transaction_session_timeout: 1000,
+    idle_in_transaction_session_timeout: 10000,
     
   },
   pool: {
