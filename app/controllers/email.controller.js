@@ -12,15 +12,26 @@ exports.emailSubmit = (req, res) => {
     };
     // Save Email in the database
     Email.create(email)
-    .then(result => {
-        res.send({status: "SUCCESS", data: result})
-    })
-    .catch(err => {
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while submit Email."
+        .then(result => {
+            res.send({ status: "SUCCESS", data: result })
+        })
+        .catch(err => {
+            console.log(err.name);
+            if (err.name === 'SequelizeValidationError') {
+                // Handle validation errors from Sequelize
+                const validationErrors = err.errors.map((err) => ({
+                    field: err.path,
+                    message: err.message,
+                }));
+                res.status(400).json({ status: "ERROR", message: 'Validation error', errors: validationErrors });
+            } else {
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while submit Email."
+                });
+            }
+
         });
-    });
 };
 
 // Email List
